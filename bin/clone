@@ -2,6 +2,16 @@
 
 cd repos
 
-for repo in $(gh repo list | awk '{ print $1 }') do
-  echo $repo
+list-repos() {
+  gh repo list | awk '{ print $1 }' | awk -F/ '{ print $2 }'
+}
+
+for repo in $(list-repos); do
+  if test -d $repo; then
+    echo "$(tput setaf 2)~$(tput sgr0) Updating $(tput setaf 7)$repo$(tput sgr0)"
+    cd $repo; git pull -r; cd -
+  else
+    echo "$(tput setaf 2)~$(tput sgr0) Cloning $(tput setaf 7)$repo$(tput sgr0)"
+    gh repo clone $repo
+  fi
 done
