@@ -16,3 +16,8 @@ Installed and authenticated [[https://cli.github.com][GitHub CLI]].
 
 - On the first run, it will clone all your repositories.
 - On subsequent runs, it will clone any new repositories and updates the already cloned ones.
+
+*** =BLACKLIST=
+
+- Any repositories you wish to ignore.
+- ~BLACKLIST="my-old-repo-1 my-old-repo-2" ./bin/clone~
