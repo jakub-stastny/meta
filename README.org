@@ -6,3 +6,13 @@ This allows for:
 
 - Updating files like =.editorconfig= of all the projects in one place.
 - Back up all the projects.
+
+* Dependencies
+
+Installed and authenticated [[https://cli.github.com][GitHub CLI]].
+
+* Usage
+** =bin/clone=
+
+- On the first run, it will clone all your repositories.
+- On subsequent runs, it will clone any new repositories and updates the already cloned ones.
