@@ -2,16 +2,35 @@
 
 cd repos
 
+typeset -T -U -gx -a BLACKLIST blacklist ' '
+
 list-repos() {
   gh repo list | awk '{ print $1 }' | awk -F/ '{ print $2 }'
 }
 
-for repo in $(list-repos); do
-  if test -d $repo; then
-    echo "$(tput setaf 2)~$(tput sgr0) Updating $(tput setaf 7)$repo$(tput sgr0)"
-    cd $repo; git pull -r; cd -
+delete-if-present-or-ignore() {
+  if test -d $1; then
+    echo "~ $(tput setaf 1)Deleting$(tput sgr0) blacklisted $(tput setaf 7)$1$(tput sgr0)"
+    rm -rf $1
   else
-    echo "$(tput setaf 2)~$(tput sgr0) Cloning $(tput setaf 7)$repo$(tput sgr0)"
-    gh repo clone $repo
+    echo "~ $(tput setaf 7)Ignoring $1$(tput sgr0)"
+  fi
+}
+
+clone-or-update() {
+  if test -d $1; then
+    echo "~ $(tput setaf 2)Updating $(tput setaf 7)$1$(tput sgr0)"
+    cd $1; git pull -r; cd -
+  else
+    echo "~ $(tput setaf 1)Cloning $(tput setaf 7)$1$(tput sgr0)"
+    gh repo clone $1
+  fi
+}
+
+for repo in $(list-repos); do
+  if (( ${blacklist[(I)$repo]} )); then
+    delete-if-present-or-ignore $repo
+  else
+    clone-or-update $repo
   fi
 done
