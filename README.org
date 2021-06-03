@@ -1,0 +1,8 @@
+* About
+
+Repository management tool. It queries the GitHub API and clones all the repositories from a given GitHub account.
+
+This allows for:
+
+- Updating files like =.editorconfig= of all the projects in one place.
+- Back up all the projects.

@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+cd repos
+
+for repo in $(gh repo list | awk '{ print $1 }') do
+  echo $repo
+done
