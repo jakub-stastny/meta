@@ -4,6 +4,7 @@ load ~/.zsh/environments/basic.zsh
 # Custom functions, aliases and hooks.
 typeset -T -U -gx -a BLACKLIST blacklist ' '
 
+# TODO: this should manage .env as well.
 blist-add()        { blacklist+=("$@") }
 blist-prepend()    { blacklist=("$@" $blacklist) }
 blist-del()        { for i ("$@") { blacklist[(r)$i]=() } }
