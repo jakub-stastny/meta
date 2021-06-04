@@ -21,3 +21,4 @@ Installed and authenticated [[https://cli.github.com][GitHub CLI]].
 
 - Variable =BLACKLIST= with space-separated list of repositories to ignore.
 - For instance: ~BLACKLIST="my-old-repo-1 my-old-repo-2" ./bin/clone~.
+- I'm keeping my =BLACKLIST= in =.env=.
